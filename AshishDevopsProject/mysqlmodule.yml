@@ -1,0 +1,23 @@
+---
+-
+  hosts: all
+  remote_user: root
+  tasks:
+-
+  name: Install "pip"
+  apt: name=python-pip state=present
+-
+  name: Install "libmysqlclient-dev"
+  apt: name=libmysqlclient-dev state=present
+-
+  name: Install the Python MySQLB module
+  pip: name=MySQL-python
+-
+  name: Create database user testdb
+  mysql_user: user=testdb password=testdb priv=*.*:ALL state=present
+-
+  name: Create database test
+  mysql_db: db=testdb state=present
+-
+  name: Create a Table reg
+  command: mysql -u testdb -p testdb -e 'CREATE TABLE req (FirstName varchar(30), LastName varchar(30), Age int(10), CreatedAtTimestamp timestamp );' test

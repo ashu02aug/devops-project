@@ -1,0 +1,80 @@
+1 ) Install Oracle VM virtualBox Manager.
+
+2) Create a vitual machine & named it as AnsibleControler.
+
+3) Login to AnsibleController host & open a Terminal. 
+
+4) Install Ansible, using below steps
+* sudo apt update
+* sudo apt install software-properties-common 
+* sudo apt-add-repository ppa:ansible/ansible
+* sudo apt update
+* sudo apt install ansible
+
+5)  Check installed ansible version
+
+#ansible --version
+
+6)Test if localhost is reachable by ansible
+
+#ansible -m ping localhost
+
+localhost | SUCCESS => {
+    "changed": false, 
+    "ping": "pong"
+}
+
+7) Create a playbooks which install apache, php & mysql. Refer lampstack.yml
+
+8) Install apache, php & mysql through Ansible. Run Command 
+#ansible-playbook lampstack.yml
+
+9) Test if we are able to connect mysql by executing this command.
+
+#sudo mysql -u root -p
+
+Refer SQLcheck.png screenshot to see the output
+
+9) Test if Apache installed 
+
+Go to Browser & hit localhost. A Apache Default page will come. Please refer Apachecheck.png to see the result.
+
+10) Create a playbook to install mysql module, create database & tabel. Please refer mysqlmodule.yml
+Run playbook
+#ansible-playbook mysqlmodule.yml
+
+11) Create a playbook deploywebsite.yml to deploy application/artifacts. Please refer deploywebsite.yml.It's going to copy php files.
+
+#ansible-playbook mysqlmodule.yml
+
+12) To create phpinfo.php, go to /var/www/html & create phpinfo.php. Put below lines & save
+
+<?php
+phpinfo();
+?>
+
+13) To listen application on port 8001. Change Apache2 default port 80 to 8001. For that open file 
+
+/etc/apache2/ports.conf & change
+
+Listen 80
+to
+Listen 8001
+
+Save the file & restart apache2 by below commands
+
+/usr/sbin/apache2ctl stop
+ps -eaf | grep apache
+/usr/sbin/apache2ctl start
+ps -eaf | grep apache
+
+14) Access Application http://localhost:8001 & php page at  http://localhost:8001/phpinfo.php . 
+Please refer Application8001.png & phpinfo.png screenshot.
+
+15) To see the Webapp having Form to add FirstName, LastName & Age, open url  http://localhost:8001/page1.php
+Please refer Forms.png for more detail
+	Fill details & press Submit Query. It will route to http://localhost:8001/page1.php & show the table contents. Please refer UserTable.png for more detail
+
+
+
+

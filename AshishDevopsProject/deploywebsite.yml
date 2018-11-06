@@ -1,0 +1,14 @@
+--- 
+- 
+  name: copy
+  become: true
+  become_user: root
+  gather_facts: true
+  hosts: localhost
+  tasks:
+- 
+  name: "copy file"
+  copy: "src=/home/ashish/page1.php dest=/var/www/html/page1.php"
+-
+  name: "copy file" 
+  copy: "src=/home/ashish/server1.php dest=/var/www/html/server1.php"
